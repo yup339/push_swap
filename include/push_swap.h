@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:25:10 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/07 19:59:51 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/12 23:45:47 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_piles
 	int		*a;
 	int		a_size;
 	int		*b;
+	int		*test_a;
+	int		*test_b;
 	int		b_size;
 	int		block_nb;
 	int		mid_nbr[100];
@@ -33,13 +35,18 @@ typedef struct s_piles
 	int		i2;
 	int		min1;
 	int		min2;
-	int		offset;
+	int		offset_a;
+	int		offset_b;
+	int		step_ra;
+	int		step_rb;
+	int		step_rr;	
+	int		step_rrr;	
 	int		flag;
 	int		target;
 }	t_piles;
 
-# ifndef SMALL_SORTING_LIMITS
-#  define SMALL_SORTING_LIMITS 5
+# ifndef SMALL_SORT_LIMITS
+#  define SMALL_SORT_LIMITS 5
 # endif
 
 void	sb(t_piles *piles, int flag);
@@ -79,8 +86,18 @@ void	sort3(t_piles *piles);
 int		get_big_index(t_piles *piles);
 int		get_right_i(int i1, int i2, int size);
 void	push_a_from_i(t_piles *piles, int i);
-
-//gonna need to be remove
-void	show_piles(int *piles, int size);
+void	fastest_push(t_piles *piles);
+void	push_big_from_block(t_piles *piles);
+void	make_copy(t_piles *piles);
+void	push_from_fix_rotation(t_piles *piles);
+int		getmax(t_piles *piles);
+void	fix_rotation(t_piles *piles);
+void	test_push_rb(t_piles *piles);
+void	test_push_ra(t_piles *piles);
+void	test_push_rr(t_piles *piles);
+void	test_push_rrr(t_piles *piles);
+void	push_from_reverse_double_rotation(t_piles *piles);
+void	push_from_double_rotation(t_piles *piles);
+void	reset_copy(t_piles *piles);
 
 #endif

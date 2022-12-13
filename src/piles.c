@@ -6,16 +6,29 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:16:18 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/07 13:27:37 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:32:20 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	print_solution(t_piles *piles)
+void	make_copy(t_piles *piles)
 {
-	ft_printf("%s", piles->step);
-	return (1);
+	int	a;
+	int	b;
+
+	a = 0;
+	b = 0;
+	while (a < piles->a_size)
+	{
+		piles->test_a[a] = piles->a[a];
+		a++;
+	}
+	while (b < piles->b_size)
+	{
+		piles->test_b[b] = piles->b[b];
+		b++;
+	}
 }
 
 void	ft_clean_piles(t_piles *piles)
@@ -26,6 +39,10 @@ void	ft_clean_piles(t_piles *piles)
 			free(piles->a);
 		if (piles->b)
 			free(piles->b);
+		if (piles->test_a)
+			free(piles->test_a);
+		if (piles->test_b)
+			free(piles->test_b);
 		if (piles->step)
 			free (piles->step);
 		if (piles->solve)
@@ -79,6 +96,8 @@ t_piles	*ft_make_piles(int argc, char **argv)
 	piles = (t_piles *)malloc(sizeof(t_piles));
 	piles->a = (int *)malloc(argc * sizeof(int));
 	piles->b = (int *)malloc(argc * sizeof(int));
+	piles->test_b = (int *)malloc(argc * sizeof(int));
+	piles->test_a = (int *)malloc(argc * sizeof(int));
 	piles->solve = (int *)malloc(argc * sizeof(int));
 	piles->step = ft_calloc(1, 1);
 	piles->nb_elem = argc - 1;

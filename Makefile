@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/18 15:34:27 by pbergero          #+#    #+#              #
-#    Updated: 2022/12/08 21:07:40 by pbergero         ###   ########.fr        #
+#    Created: 2022/12/08 21:04:21 by pbergero          #+#    #+#              #
+#    Updated: 2022/12/12 23:43:37 by pbergero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,12 @@
 #                                  GENERICS                                    #
 #------------------------------------------------------------------------------#
 
+# Special variables
+DEFAULT_GOAL: all
+.DELETE_ON_ERROR: $(NAME)
+.PHONY: all bonus clean fclean re
+# 'HIDE = @' will hide all terminal output from Make
+HIDE =
 
 
 #------------------------------------------------------------------------------#
@@ -24,20 +30,33 @@
 CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
 RM		=	rm -f
-LIBCMP	=	ar -rcs
 
 # Output file name
-NAME	=	libftprintf.a
+NAME	=	push_swap
 
 # Sources are all .c files
-SRCS	=	ft_printf.c\
-			ft_printf_util.c\
-			ft_printf_hexa.c\
-			ft_printf_ptr.c 
-			
+SRCS	=	./src/sort_utils.c \
+			./src/small_sorting_algo.c\
+			./src/push_swap.c\
+			./src/piles.c\
+			./src/piles_util.c\
+			./src/big_sorting_algo.c\
+			./src/big_sort_util.c\
+			./src/algo_ps_s.c\
+			./src/algo_ps_r.c\
+			./src/algo_ps_rr.c\
+			./src/algo_ps_p.c\
+			./src/fastest_push.c\
+			./src/sort_using_a_piles.c\
+			./src/sort_using_b_piles.c\
+			./src/sort_using_both_piles_rrr.c\
+			./src/sort_using_both_piles_rr.c\
+			./src/try_fastest_algo.c
 
+libft	=	./printf/libftprintf.a
 # Objects are all .o files
 OBJS	=	$(SRCS:.c=.o)
+
 #------------------------------------------------------------------------------#
 #                                 TARGETS                                      #
 #------------------------------------------------------------------------------#
@@ -46,18 +65,15 @@ all: $(NAME)
 
 # Generates output file
 $(NAME): $(OBJS)
-	$(MAKE) bonus -C ./libft
-	cp libft/libft.a $(NAME)
-	$(LIBCMP) $(NAME) $(OBJS)
+	$(HIDE)$(CC) $(CFLAGS) $(libft) -o $@ $^
 
-# Removes objectsm
+# Removes objects
 clean:
-	$(RM) $(OBJS) 
+	$(HIDE)$(RM) $(OBJS)
 
 # Removes objects and executables
 fclean: clean
-	$(RM) $(NAME)
+	$(HIDE)$(RM) $(NAME)
+
 # Removes objects and executables and remakes
 re: fclean all
-
-.PHONY: bonus all clean fclean re

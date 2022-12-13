@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 05:44:06 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/08 19:25:14 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/12 22:45:17 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,37 +52,6 @@ static void	splitlist(t_piles *piles)
 	splitlist(piles);
 }
 
-void	update_rotation(t_piles *piles)
-{
-	if (piles->a[0] < piles->target)
-	{
-		while (piles->a[0] < piles->target)
-		{
-			ra(piles, 1);
-			piles->offset++;
-		}
-	}
-	while (piles->target > piles->a[piles->a_size - 1] && piles->offset)
-	{
-		rra(piles, 1);
-		piles->offset--;
-	}
-}
-
-static void	push_big_from_block(t_piles *piles)
-{
-	int	index;
-	int	flag;
-
-	piles->i1 = 0;
-	piles->i2 = 0;
-	index = get_big_index(piles);
-	piles->target = piles->b[index];
-	//update_rotation(piles);
-	push_a_from_i(piles, index);
-	piles->blocksize[piles->block_nb]--;
-}
-
 static void	sort_block(t_piles *piles)
 {
 	int	flag;
@@ -90,7 +59,7 @@ static void	sort_block(t_piles *piles)
 	flag = 0;
 	if (!piles->blocksize[piles->block_nb])
 		return ;
-	push_big_from_block(piles);
+	fastest_push(piles);
 	sort_block(piles);
 }
 
@@ -113,7 +82,9 @@ void	big_sort(t_piles *piles)
 		sa(piles, 1);
 	while (piles->block_nb)
 	{
-		piles->offset = 0;
+		piles->offset_a = 0;
+		piles->offset_b = 0;
+		fix_rotation(piles);
 		sort_block(piles);
 		piles->block_nb--;
 	}

@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:24:01 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/08 15:06:15 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:58:39 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	is_int(char *nb)
 int	check_param(int argc, char **argv)
 {
 	int	i;
-	int	j;
 
 	i = 1;
 	if (argc <= 1)
@@ -61,12 +60,19 @@ int	check_param(int argc, char **argv)
 	return (1);
 }
 
-/*using for test*/
-
-void	show_piles(int *piles, int size)
+void	fix_rotation(t_piles *piles)
 {
-	for (int i = 0; i < size; i++)
-		ft_printf("%d\n", piles[i]);
+	int	i;
+	int	smallest;
+
+	i = find_smallest_index(piles);
+	smallest = piles->a[i];
+	if (i < piles->a_size / 2)
+		while (piles->a[0] != smallest)
+			ra(piles, 1);
+	else
+		while (piles->a[0] != smallest)
+			rra(piles, 1);
 }
 
 int	main(int argc, char **argv)
@@ -79,19 +85,12 @@ int	main(int argc, char **argv)
 		ft_printf("Error\n");
 		return (-1);
 	}
-//	show_piles(piles->a, piles->a_size); 
-//	ft_printf("\n");  
-	if (piles->nb_elem <= 5)
+	if (piles->nb_elem <= SMALL_SORT_LIMITS)
 		small_sort(piles);
 	else
 		big_sort(piles);
-	print_solution(piles); 
-	//ft_printf("\npile A\n"); //  
-	//show_piles(piles->a, piles->a_size); // 
-	//ft_printf("\n piles B \n"); // 
-	//show_piles(piles->b, piles->b_size); // 
-	//ft_printf("\n it took %d step", piles->nb_step);
-	//ft_printf("\n for %d elements", piles->nb_elem);
+	fix_rotation(piles);
+	ft_printf("%s", piles->step);
 	ft_clean_piles(piles);
 	return (1);
 }
