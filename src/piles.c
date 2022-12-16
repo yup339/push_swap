@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:16:18 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/12 16:32:20 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/15 23:29:10 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,7 @@ t_piles	*ft_make_piles(int argc, char **argv)
 	t_piles	*piles;
 
 	if (!check_param(argc, argv))
-	{
 		return (NULL);
-	}
 	piles = (t_piles *)malloc(sizeof(t_piles));
 	piles->a = (int *)malloc(argc * sizeof(int));
 	piles->b = (int *)malloc(argc * sizeof(int));
@@ -106,10 +104,10 @@ t_piles	*ft_make_piles(int argc, char **argv)
 	piles->nb_step = 0;
 	piles->block_nb = 0;
 	if (!piles ||!piles->a || !piles->b || !piles->step || !piles->solve
-		|| !add_numbers(argc, argv, piles->a))
-		return (NULL);
-	if (!checkdouble(piles->a, piles->a_size))
+		|| !add_numbers(argc, argv, piles->a)
+		|| !checkdouble(piles->a, piles->a_size))
 		return (NULL);
 	solve_array(piles);
+	piles->max = piles->solve[piles->nb_elem - 1];
 	return (piles);
 }

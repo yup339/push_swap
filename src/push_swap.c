@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:24:01 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/12 21:58:39 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/16 03:03:24 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ void	fix_rotation(t_piles *piles)
 
 	i = find_smallest_index(piles);
 	smallest = piles->a[i];
-	if (i < piles->a_size / 2)
-		while (piles->a[0] != smallest)
-			ra(piles, 1);
-	else
+	if (i > piles->a_size / 2)
 		while (piles->a[0] != smallest)
 			rra(piles, 1);
+	else
+		while (piles->a[0] != smallest)
+			ra(piles, 1);
 }
 
 int	main(int argc, char **argv)

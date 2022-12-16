@@ -6,7 +6,7 @@
 #    By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/08 21:04:21 by pbergero          #+#    #+#              #
-#    Updated: 2022/12/12 23:43:37 by pbergero         ###   ########.fr        #
+#    Updated: 2022/12/16 04:57:20 by pbergero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ SRCS	=	./src/sort_utils.c \
 			./src/sort_using_b_piles.c\
 			./src/sort_using_both_piles_rrr.c\
 			./src/sort_using_both_piles_rr.c\
-			./src/try_fastest_algo.c
+			./src/try_fastest_algo.c\
+			./src/mix_sort_ra_rb.c
 
 libft	=	./printf/libftprintf.a
 # Objects are all .o files

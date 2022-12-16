@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 09:14:32 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/12 22:39:43 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/16 05:08:15 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,29 @@ int	getmax(t_piles *piles)
 
 void	find_mid_nbr(t_piles *piles)
 {
+	int	i;
+	int	group_size;
+
+	if (piles->nb_elem >= 500)
+		group_size = GROUP_500;
+	else
+		group_size = GROUP_100;
+	i = piles->a_size / group_size;
 	solve_array(piles);
-	piles->mid_nbr[piles->block_nb] = piles->solve[piles->a_size / 4];
+	piles->mid_nbr[piles->block_nb] = piles->solve[i];
+}
+
+void	push_but_top3(t_piles *piles)
+{
+	piles->block_nb++;
+	while (piles->a_size > 3)
+	{
+		if (piles->a[0] < piles->solve[piles->nb_elem - 3])
+		{
+			pb(piles);
+			piles->blocksize[piles->block_nb]++;
+		}
+		else
+			ra(piles, 1);
+	}
 }

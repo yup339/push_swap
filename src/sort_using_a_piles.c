@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:20:22 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/12 23:47:26 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/16 03:34:31 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ static void	make_ccw_rotation(t_piles *piles)
 	int	offset;
 
 	offset = piles->offset_a;
-	while (piles->target > piles->a[0])
+	while (!is_pushable(piles, 0))
 	{
 		ra(piles, piles->flag);
 		offset++;
+		if (offset == piles->a_size - 1)
+			offset = 0;
 		piles->step_ra++;
 	}
 	if (piles->flag)
@@ -32,30 +34,38 @@ static void	make_cw_rotation(t_piles *piles)
 	int	offset;
 
 	offset = piles->offset_a;
-	while ((piles->target < piles->a[0]
-			&& piles->target < piles->a[piles->a_size - 1]) && offset)
+	while (!is_pushable(piles, 0))
 	{
 		rra(piles, piles->flag);
 		offset--;
-		piles->step_ra++;
+		if (-offset == piles->a_size - 1)
+			offset = 0;
+		piles->step_rra++;
 	}
 	if (piles->flag)
 		piles->offset_a = offset;
 }
 
-void	update_rotation(t_piles *piles)
+void	push_using_ra(t_piles *piles)
 {
-	if ((piles->target < piles->a[0]
-			&& piles->target < piles->a[piles->a_size - 1]) && piles->offset_a)
-		make_cw_rotation(piles);
-	else
-		make_ccw_rotation(piles);
+	make_ccw_rotation(piles);
+	piles->opt = OPT_RA;
+	piles->smallest_opt = piles->step_ra;
+	if (piles->flag)
+	{
+		pa(piles);
+		piles->blocksize[piles->block_nb]--;
+	}
 }
 
-void	push_from_fix_rotation(t_piles *piles)
+void	push_using_rra(t_piles *piles)
 {
-	piles->target = piles->b[0];
-	update_rotation(piles);
+	make_cw_rotation(piles);
+	if (piles->step_rra <= piles->smallest_opt)
+	{
+	piles->opt = OPT_RRA;
+	piles->smallest_opt = piles->step_rra;
+	}
 	if (piles->flag)
 	{
 		pa(piles);

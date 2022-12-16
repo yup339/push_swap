@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 05:44:06 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/12 22:45:17 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/16 05:15:11 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ static void	splitlist(t_piles *piles)
 
 static void	sort_block(t_piles *piles)
 {
-	int	flag;
-
-	flag = 0;
 	if (!piles->blocksize[piles->block_nb])
 		return ;
 	fastest_push(piles);
@@ -65,26 +62,28 @@ static void	sort_block(t_piles *piles)
 
 void	big_sort(t_piles *piles)
 {
+	int	group_size;
+
+	if (piles->nb_elem >= 500)
+		group_size = LIMITS_500;
+	else
+		group_size = LIMITS_100;
 	if (check_sort(piles))
 		return ;
 	check_rotation(piles);
 	if (check_sort(piles))
 		return ;
-	while (piles->a_size > 3)
+	while (piles->a_size > group_size)
 	{
 		piles->block_nb++;
 		find_mid_nbr(piles);
 		splitlist(piles);
 	}
-	if (piles->a_size == 3)
-		sort3(piles);
-	else if (piles->a[0] > piles->a[1])
-		sa(piles, 1);
+	push_but_top3(piles);
 	while (piles->block_nb)
 	{
 		piles->offset_a = 0;
 		piles->offset_b = 0;
-		fix_rotation(piles);
 		sort_block(piles);
 		piles->block_nb--;
 	}

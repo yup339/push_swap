@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 02:20:54 by pbergero          #+#    #+#             */
-/*   Updated: 2022/11/30 08:28:25 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/16 00:38:06 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	find_smallest_index(t_piles *piles)
 	int	index_small_nb;
 	int	smallest;
 
-	i = 1;
+	i = 0;
 	smallest = piles->a[0];
 	index_small_nb = 0;
 	while (i < piles->a_size)

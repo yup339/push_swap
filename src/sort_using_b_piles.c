@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:19:39 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/13 01:00:17 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/16 03:04:01 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	push_a_from_i(t_piles *piles, int i)
 			piles->step_rb++;
 		}
 	}
-	if (piles->flag == 1)
+	if (piles->flag)
 		pa(piles);
 }
 
@@ -44,28 +44,14 @@ int	get_index(t_piles *piles)
 {
 	int	i;
 
-	i = -1;
-	if (piles->offset_a)
+	i = 0;
+	while (i < piles->b_size - 1)
 	{
-		while (++i < piles->b_size - 1)
-		{
-			if (piles->b[i] < piles->a[0]
-				&& piles->b[i] > piles->a[piles->a_size - 1])
-				return (i);
-			if (piles->b[piles->b_size - i] < piles->a[0]
-				&& piles->b[piles->b_size - i] > piles->a[piles->a_size - 1])
-				return (piles->b_size - i);
-		}
-	}
-	else
-	{
-		while (++i < piles->b_size - 1)
-		{
-			if (piles->b[i] < piles->a[0])
-				return (i);
-			if (piles->b[piles->b_size - i] < piles->a[0])
-				return (piles->b_size - i);
-		}
+		if (is_pushable(piles, i))
+			return (i);
+		if (is_pushable(piles, piles->b_size - 1 - i))
+			return (piles->b_size - 1 - i);
+		i++;
 	}
 	return (-1);
 }
@@ -77,8 +63,13 @@ void	push_big_from_block(t_piles *piles)
 	i = get_index(piles);
 	if (i == -1)
 	{
-		piles->step_rb = piles->nb_elem * 10;
+		piles->step_rb = piles->step_ra + 1;
 		return ;
+	}
+	if (piles->step_rb <= piles->smallest_opt)
+	{
+	piles->opt = OPT_RB;
+	piles->smallest_opt = piles->step_rb;
 	}
 	push_a_from_i(piles, i);
 	if (piles->flag)
