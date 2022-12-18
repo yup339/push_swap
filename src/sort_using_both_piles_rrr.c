@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 22:40:53 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/16 02:29:53 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/18 00:34:41 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	push_from_reverse_double_rotation(t_piles *piles)
 	do_rrr_util_good(piles);
 	if (piles->step_rrr <= piles->smallest_opt)
 	{
-	piles->opt = OPT_RRR;
+	piles->current_opt[0] = OPT_RRR;
 	piles->smallest_opt = piles->step_rrr;
 	}
 	if (piles->flag)

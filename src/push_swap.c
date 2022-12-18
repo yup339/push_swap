@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:24:01 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/16 03:03:24 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/17 23:36:13 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	main(int argc, char **argv)
 	if (!piles)
 	{
 		ft_printf("Error\n");
+		ft_clean_piles(piles);
 		return (-1);
 	}
 	if (piles->nb_elem <= SMALL_SORT_LIMITS)

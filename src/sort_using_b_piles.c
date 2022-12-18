@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:19:39 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/16 03:04:01 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/18 00:34:51 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ void	push_big_from_block(t_piles *piles)
 	i = get_index(piles);
 	if (i == -1)
 	{
-		piles->step_rb = piles->step_ra + 1;
+		piles->step_rb = piles->nb_elem * 10;
 		return ;
 	}
 	if (piles->step_rb <= piles->smallest_opt)
 	{
-	piles->opt = OPT_RB;
+	piles->current_opt[0] = OPT_RB;
 	piles->smallest_opt = piles->step_rb;
 	}
 	push_a_from_i(piles, i);

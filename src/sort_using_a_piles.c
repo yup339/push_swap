@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:20:22 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/16 03:34:31 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/18 00:35:17 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	make_ccw_rotation(t_piles *piles)
 	int	offset;
 
 	offset = piles->offset_a;
-	while (!is_pushable(piles, 0))
+	while (!is_pushable(piles, 0) && piles->step_ra < piles->a_size)
 	{
 		ra(piles, piles->flag);
 		offset++;
@@ -34,7 +34,7 @@ static void	make_cw_rotation(t_piles *piles)
 	int	offset;
 
 	offset = piles->offset_a;
-	while (!is_pushable(piles, 0))
+	while (!is_pushable(piles, 0) && piles->step_rra < piles->a_size)
 	{
 		rra(piles, piles->flag);
 		offset--;
@@ -49,7 +49,7 @@ static void	make_cw_rotation(t_piles *piles)
 void	push_using_ra(t_piles *piles)
 {
 	make_ccw_rotation(piles);
-	piles->opt = OPT_RA;
+	piles->current_opt[0] = OPT_RA;
 	piles->smallest_opt = piles->step_ra;
 	if (piles->flag)
 	{
@@ -63,7 +63,7 @@ void	push_using_rra(t_piles *piles)
 	make_cw_rotation(piles);
 	if (piles->step_rra <= piles->smallest_opt)
 	{
-	piles->opt = OPT_RRA;
+	piles->current_opt[0] = OPT_RRA;
 	piles->smallest_opt = piles->step_rra;
 	}
 	if (piles->flag)

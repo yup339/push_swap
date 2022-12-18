@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:05:43 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/16 05:01:38 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/18 00:36:07 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,43 +47,43 @@ int	is_pushable(t_piles *piles, int i)
 	return (0);
 }
 
-static void	choose_fastest_algo(t_piles *piles)
+static void	choose_fastest_algo(t_piles *piles, int opt)
 {
-	if (piles->opt == OPT_RA)
+	if (opt == OPT_RA)
 		push_using_ra(piles);
-	if (piles->opt == OPT_RRA)
+	if (opt == OPT_RRA)
 		push_using_rra(piles);
-	if (piles->opt == OPT_RB)
+	if (opt == OPT_RB)
 		push_big_from_block(piles);
-	if (piles->opt == OPT_RR)
+	if (opt == OPT_RR)
 		push_from_double_rotation(piles);
-	if (piles->opt == OPT_RRR)
+	if (opt == OPT_RRR)
 		push_from_reverse_double_rotation(piles);
-	if (piles->opt == OPT_MIX_RA_RRB)
+	if (opt == OPT_MIX_RA_RRB)
 		push_mix_ra_rrb(piles);
-	if (piles->opt == OPT_MIX_RRA_RB)
+	if (opt == OPT_MIX_RRA_RB)
 		push_mix_rra_rb(piles);
 }
 
+/*static void	deep_search(t_piles *piles)
+{
+	return ;
+}*/
+
 void	fastest_push(t_piles *piles)
 {
-	piles->step_ra = 0;
-	piles->step_rra = 0;
-	piles->step_rb = 0;
-	piles->step_rr = 0;
-	piles->step_rrr = 0;
-	piles->step_ra_rrb = 0;
-	piles->step_rra_rb = 0;
-	piles->flag = 0;
+	piles->current_deep_count = 0;
+	piles->best_step_count = INT_MAX;
+	reset_counters(piles);
 	make_copy(piles);
-	test_push(piles, push_using_ra);
-	test_push(piles, push_using_rra);
-	test_push(piles, push_big_from_block);
-	test_push(piles, push_from_double_rotation);
-	test_push(piles, push_from_reverse_double_rotation);
-	test_push(piles, push_mix_ra_rrb);
-	test_push(piles, push_mix_rra_rb);
+	test_push(piles, push_using_ra, 1);
+	test_push(piles, push_using_rra, 1);
+	test_push(piles, push_big_from_block, 1);
+	test_push(piles, push_from_double_rotation, 1);
+	test_push(piles, push_from_reverse_double_rotation, 1);
+	test_push(piles, push_mix_ra_rrb, 1);
+	test_push(piles, push_mix_rra_rb, 1);
 	reset_copy(piles);
 	piles->flag = 1;
-	choose_fastest_algo(piles);
+	choose_fastest_algo(piles, piles->current_opt[0]);
 }

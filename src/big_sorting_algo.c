@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 05:44:06 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/16 05:15:11 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/16 07:03:46 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	big_sort(t_piles *piles)
 		group_size = LIMITS_500;
 	else
 		group_size = LIMITS_100;
-	if (check_sort(piles))
-		return ;
 	check_rotation(piles);
 	if (check_sort(piles))
 		return ;
@@ -79,7 +77,9 @@ void	big_sort(t_piles *piles)
 		find_mid_nbr(piles);
 		splitlist(piles);
 	}
-	push_but_top3(piles);
+	piles->mid_nbr[piles->block_nb] = piles->solve[piles->nb_elem - 3];
+	splitlist(piles);
+	sort3(piles);
 	while (piles->block_nb)
 	{
 		piles->offset_a = 0;

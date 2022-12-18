@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:25:10 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/16 05:20:18 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/18 00:33:43 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,21 @@
 
 # include "../printf/ft_printf.h"
 # include <limits.h>
+
+# define SMALL_SORT_LIMITS 5
+
+# define OPT_RA 1
+# define OPT_RRA 2
+# define OPT_RB 3
+# define OPT_RR 4
+# define OPT_RRR 5
+# define OPT_MIX_RA_RRB 6
+# define OPT_MIX_RRA_RB 7
+# define GROUP_100 3
+# define GROUP_500 7
+# define LIMITS_100 3
+# define LIMITS_500 20
+# define DEPTH_SEARCH 3
 
 typedef struct s_piles
 {
@@ -27,6 +42,7 @@ typedef struct s_piles
 	int		block_nb;
 	int		mid_nbr[50];
 	int		blocksize[50];
+	int		deep_search_choice[DEPTH_SEARCH];
 	int		nb_elem;
 	int		*solve;
 	char	*step;
@@ -44,64 +60,19 @@ typedef struct s_piles
 	int		step_rr;
 	int		step_rrr;
 	int		step_ra_rrb;
-	int		step_rra_rb;	
+	int		step_rra_rb;
+	int		current_deep_count;	
+	int		best_step_count;
+	int		excess_ra;
+	int		excess_rb;
+	int		excess_rrb;
+	int		excess_rra;
 	int		smallest_opt;
-	int		opt;
+	int		current_opt[DEPTH_SEARCH];
+	int		opt[DEPTH_SEARCH];
 	int		flag;
 	int		target;
 }	t_piles;
-
-# ifndef SMALL_SORT_LIMITS
-#  define SMALL_SORT_LIMITS 5
-# endif
-
-# ifndef OPT_RA
-#  define OPT_RA 1
-# endif
-
-# ifndef OPT_RRA
-#  define OPT_RRA 2
-# endif
-
-# ifndef OPT_RB
-#  define OPT_RB 3
-# endif
-
-# ifndef OPT_RR
-#  define OPT_RR 4
-# endif
-
-# ifndef OPT_RRR
-#  define OPT_RRR 5
-# endif
-
-# ifndef OPT_MIX_RA_RRB
-#  define OPT_MIX_RA_RRB 6
-# endif
-
-# ifndef OPT_MIX_RRA_RB
-#  define OPT_MIX_RRA_RB 7
-# endif
-
-# ifndef OPT_MIX_RRA_RB
-#  define OPT_MIX_RRA_RB 7
-# endif
-
-# ifndef GROUP_100
-#  define GROUP_100 3
-# endif
-
-# ifndef GROUP_500
-#  define GROUP_500 5
-# endif
-
-# ifndef LIMITS_100
-#  define LIMITS_100 2
-# endif
-
-# ifndef LIMITS_500
-#  define LIMITS_500 10
-# endif
 
 void	sb(t_piles *piles, int flag);
 void	sa(t_piles *piles, int flag);
@@ -150,7 +121,7 @@ void	test_push_rra(t_piles *piles);
 void	test_push_ra(t_piles *piles);
 void	test_push_rr(t_piles *piles);
 void	test_push_rrr(t_piles *piles);
-void	test_push(t_piles *piles, void (*f)(t_piles *piles));
+void	test_push(t_piles *piles, void (*f)(t_piles *piles), int flag);
 void	push_from_reverse_double_rotation(t_piles *piles);
 void	push_from_double_rotation(t_piles *piles);
 void	reset_copy(t_piles *piles);
@@ -165,5 +136,10 @@ int		check_around(t_piles *piles);
 int		in_block(t_piles *piles, int i);
 void	push_mix_rra_rb(t_piles *piles);
 void	push_but_top3(t_piles *piles);
+void	remove_exess_ra(t_piles *piles);
+void	remove_exess_rra(t_piles *piles);
+void	remove_exess_rb(t_piles *piles);
+void	remove_exess_rrb(t_piles *piles);
+void	reset_counters(t_piles *piles);
 
 #endif
