@@ -1,0 +1,14 @@
+# Target labels
+ sfml-populate
+# Source files and their labels
+/Users/pbergero/Desktop/push_swap/build/push_swap_visualizer/build/_deps/sfml-subbuild/CMakeFiles/sfml-populate
+/Users/pbergero/Desktop/push_swap/build/push_swap_visualizer/build/_deps/sfml-subbuild/CMakeFiles/sfml-populate.rule
+/Users/pbergero/Desktop/push_swap/build/push_swap_visualizer/build/_deps/sfml-subbuild/CMakeFiles/sfml-populate-complete.rule
+/Users/pbergero/Desktop/push_swap/build/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-build.rule
+/Users/pbergero/Desktop/push_swap/build/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-configure.rule
+/Users/pbergero/Desktop/push_swap/build/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-download.rule
+/Users/pbergero/Desktop/push_swap/build/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-install.rule
+/Users/pbergero/Desktop/push_swap/build/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-mkdir.rule
+/Users/pbergero/Desktop/push_swap/build/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-patch.rule
+/Users/pbergero/Desktop/push_swap/build/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-test.rule
+/Users/pbergero/Desktop/push_swap/build/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-update.rule
