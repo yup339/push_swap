@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 09:14:32 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/16 06:42:51 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:10:05 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int	getmax(t_piles *piles)
 
 void	find_mid_nbr(t_piles *piles)
 {
-	int	i;
-	int	group_size;
+	int		i;
+	double	group_size;
 
 	if (piles->nb_elem >= 500)
 		group_size = GROUP_500;

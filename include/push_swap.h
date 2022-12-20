@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:25:10 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/18 00:33:43 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:12:43 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@
 # define OPT_RRR 5
 # define OPT_MIX_RA_RRB 6
 # define OPT_MIX_RRA_RB 7
-# define GROUP_100 3
-# define GROUP_500 7
-# define LIMITS_100 3
-# define LIMITS_500 20
-# define DEPTH_SEARCH 3
+# define NBR_OF_OPT 7
+# define GROUP_100 2
+# define GROUP_500 5
+# define LIMITS_100 10
+# define LIMITS_500 75
+# define DEPTH_SEARCH 1
 
 typedef struct s_piles
 {
@@ -42,7 +43,7 @@ typedef struct s_piles
 	int		block_nb;
 	int		mid_nbr[50];
 	int		blocksize[50];
-	int		deep_search_choice[DEPTH_SEARCH];
+	int		best_opt[DEPTH_SEARCH];
 	int		nb_elem;
 	int		*solve;
 	char	*step;
@@ -62,14 +63,13 @@ typedef struct s_piles
 	int		step_ra_rrb;
 	int		step_rra_rb;
 	int		current_deep_count;	
-	int		best_step_count;
+	int		best_deep_count;
 	int		excess_ra;
 	int		excess_rb;
 	int		excess_rrb;
 	int		excess_rra;
 	int		smallest_opt;
 	int		current_opt[DEPTH_SEARCH];
-	int		opt[DEPTH_SEARCH];
 	int		flag;
 	int		target;
 }	t_piles;
@@ -121,7 +121,6 @@ void	test_push_rra(t_piles *piles);
 void	test_push_ra(t_piles *piles);
 void	test_push_rr(t_piles *piles);
 void	test_push_rrr(t_piles *piles);
-void	test_push(t_piles *piles, void (*f)(t_piles *piles), int flag);
 void	push_from_reverse_double_rotation(t_piles *piles);
 void	push_from_double_rotation(t_piles *piles);
 void	reset_copy(t_piles *piles);
@@ -141,5 +140,7 @@ void	remove_exess_rra(t_piles *piles);
 void	remove_exess_rb(t_piles *piles);
 void	remove_exess_rrb(t_piles *piles);
 void	reset_counters(t_piles *piles);
+void	deep_search(t_piles *piles);
+void	choose_algo(t_piles *piles, int opt);
 
 #endif

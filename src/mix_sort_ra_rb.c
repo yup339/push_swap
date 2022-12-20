@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 01:17:53 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/18 00:35:32 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/20 10:05:10 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	do_ra_rrb_util_good(t_piles *piles)
 	int	offset;
 
 	offset = piles->offset_a;
+	piles->step_ra_rrb = 0;
 	while (!is_pushable(piles, 0) && !tested_all(piles, piles->step_ra_rrb))
 	{
 		if (piles->excess_ra)
@@ -52,12 +53,8 @@ void	push_mix_ra_rrb(t_piles *piles)
 	do_ra_rrb_util_good(piles);
 	//remove_exess_ra(piles);
 	//remove_exess_rrb(piles);
-	piles->step_ra_rrb = piles->excess_ra + piles->excess_rrb;
-	if (piles->step_ra_rrb < piles->smallest_opt)
-	{
-	piles->current_opt[0] = OPT_MIX_RA_RRB;
-	piles->smallest_opt = piles->step_ra_rrb;
-	}
+	//piles->step_ra_rrb = piles->excess_ra + piles->excess_rrb;
+	piles->current_deep_count += piles->step_ra_rrb;
 	if (piles->flag)
 	{
 		pa(piles);
@@ -70,6 +67,7 @@ static void	do_rra_rb_util_good(t_piles *piles)
 	int	offset;
 
 	offset = piles->offset_a;
+	piles->step_rra_rb = 0;
 	while (!is_pushable(piles, 0) && !tested_all(piles, piles->step_rra_rb))
 	{
 		if (piles->excess_rra)
@@ -95,12 +93,8 @@ void	push_mix_rra_rb(t_piles *piles)
 	do_rra_rb_util_good(piles);
 	//remove_exess_rra(piles);
 	//remove_exess_rb(piles);
-	piles->step_rra_rb = piles->excess_rra + piles->excess_rb;
-	if (piles->step_rra_rb < piles->smallest_opt)
-	{
-	piles->current_opt[0] = OPT_MIX_RRA_RB;
-	piles->smallest_opt = piles->step_rra_rb;
-	}
+	//piles->step_rra_rb = piles->excess_rra + piles->excess_rb;
+	piles->current_deep_count += piles->step_rra_rb;
 	if (piles->flag)
 	{
 		pa(piles);

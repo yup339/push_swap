@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:05:43 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/18 00:36:07 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/20 10:14:11 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	is_pushable(t_piles *piles, int i)
 	return (0);
 }
 
-static void	choose_fastest_algo(t_piles *piles, int opt)
+void	choose_algo(t_piles *piles, int opt)
 {
 	if (opt == OPT_RA)
 		push_using_ra(piles);
@@ -65,25 +65,26 @@ static void	choose_fastest_algo(t_piles *piles, int opt)
 		push_mix_rra_rb(piles);
 }
 
-/*static void	deep_search(t_piles *piles)
-{
-	return ;
-}*/
-
 void	fastest_push(t_piles *piles)
 {
-	piles->current_deep_count = 0;
-	piles->best_step_count = INT_MAX;
+	int	i;
+
+	i = 0;
+	piles->best_deep_count = INT_MAX;
 	reset_counters(piles);
 	make_copy(piles);
-	test_push(piles, push_using_ra, 1);
-	test_push(piles, push_using_rra, 1);
-	test_push(piles, push_big_from_block, 1);
-	test_push(piles, push_from_double_rotation, 1);
-	test_push(piles, push_from_reverse_double_rotation, 1);
-	test_push(piles, push_mix_ra_rrb, 1);
-	test_push(piles, push_mix_rra_rb, 1);
+	while (i < DEPTH_SEARCH)
+	{
+		piles->current_opt[i] = 1;
+		i++;
+	}
+	i = 0;
+	deep_search(piles);
 	reset_copy(piles);
 	piles->flag = 1;
-	choose_fastest_algo(piles, piles->current_opt[0]);
+	while (i < DEPTH_SEARCH)
+	{
+		choose_algo(piles, piles->best_opt[i]);
+		i++;
+	}
 }

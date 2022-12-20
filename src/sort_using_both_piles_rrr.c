@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 22:40:53 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/18 00:34:41 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/20 10:03:37 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	do_rrr_util_good(t_piles *piles)
 	int	offset;
 
 	offset = piles->offset_a;
+	piles->step_rrr = 0;
 	while (!is_pushable(piles, 0) && piles->step_rrr < piles->nb_elem)
 	{
 		rrr(piles, piles->flag, piles->flag);
@@ -36,11 +37,7 @@ static void	do_rrr_util_good(t_piles *piles)
 void	push_from_reverse_double_rotation(t_piles *piles)
 {
 	do_rrr_util_good(piles);
-	if (piles->step_rrr <= piles->smallest_opt)
-	{
-	piles->current_opt[0] = OPT_RRR;
-	piles->smallest_opt = piles->step_rrr;
-	}
+	piles->current_deep_count += piles->step_rrr;
 	if (piles->flag)
 	{
 		pa(piles);

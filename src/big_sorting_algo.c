@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 05:44:06 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/16 07:03:46 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:11:39 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	splitlist(t_piles *piles)
 
 static void	sort_block(t_piles *piles)
 {
-	if (!piles->blocksize[piles->block_nb])
+	if (piles->b_size == 0)
 		return ;
 	fastest_push(piles);
 	sort_block(piles);
@@ -77,7 +77,7 @@ void	big_sort(t_piles *piles)
 		find_mid_nbr(piles);
 		splitlist(piles);
 	}
-	piles->mid_nbr[piles->block_nb] = piles->solve[piles->nb_elem - 3];
+	piles->mid_nbr[++piles->block_nb] = piles->solve[piles->nb_elem - 3];
 	splitlist(piles);
 	sort3(piles);
 	while (piles->block_nb)

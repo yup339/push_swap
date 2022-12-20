@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:19:39 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/18 00:34:51 by pbergero         ###   ########.fr       */
+/*   Updated: 2022/12/20 12:12:25 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	push_a_from_i(t_piles *piles, int i)
 {
+	piles->step_rb = 0;
 	if (i > piles->b_size / 2)
 	{
 		while (i < piles->b_size)
@@ -64,13 +65,10 @@ void	push_big_from_block(t_piles *piles)
 	if (i == -1)
 	{
 		piles->step_rb = piles->nb_elem * 10;
+		piles->current_deep_count += piles->step_rb;
 		return ;
 	}
-	if (piles->step_rb <= piles->smallest_opt)
-	{
-	piles->current_opt[0] = OPT_RB;
-	piles->smallest_opt = piles->step_rb;
-	}
+	piles->current_deep_count += piles->step_rb;
 	push_a_from_i(piles, i);
 	if (piles->flag)
 		piles->blocksize[piles->block_nb]--;
