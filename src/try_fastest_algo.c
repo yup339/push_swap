@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 22:54:01 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/20 12:36:27 by pbergero         ###   ########.fr       */
+/*   Updated: 2023/02/19 14:42:10 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	update_options(t_piles *piles)
 	piles->current_opt[i]++;
 	while (i)
 	{
-		if (piles->current_opt[i] == NBR_OF_OPT)
+		if (piles->current_opt[i] > NBR_OF_OPT)
 		{
 			piles->current_opt[i] = 1;
 			piles->current_opt[i - 1]++;

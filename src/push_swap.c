@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:24:01 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/17 23:36:13 by pbergero         ###   ########.fr       */
+/*   Updated: 2023/02/27 23:43:52 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_int(char *nb)
 {
 	long	n;
 
-	n = ft_long_atoi(nb);
+	n = ft_atoi(nb);
 	if (n < INT_MIN || n > INT_MAX)
 		return (0);
 	return (1);
@@ -53,7 +53,7 @@ int	check_param(int argc, char **argv)
 		return (0);
 	while (argv[i] != NULL)
 	{
-		if (!ft_isnumber(argv[i]))
+		if (!is_str_int(argv[i]))
 			return (0);
 		i++;
 	}
@@ -82,7 +82,7 @@ int	main(int argc, char **argv)
 	piles = ft_make_piles(argc, argv);
 	if (!piles)
 	{
-		ft_printf("Error\n");
+		write_error(NULL);
 		ft_clean_piles(piles);
 		return (-1);
 	}
@@ -91,7 +91,7 @@ int	main(int argc, char **argv)
 	else
 		big_sort(piles);
 	fix_rotation(piles);
-	ft_printf("%s", piles->step);
+	printf("%s", piles->step);
 	ft_clean_piles(piles);
 	return (1);
 }

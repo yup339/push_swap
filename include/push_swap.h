@@ -6,14 +6,15 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:25:10 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/20 13:12:43 by pbergero         ###   ########.fr       */
+/*   Updated: 2023/02/27 23:43:12 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../printf/ft_printf.h"
+# include "../libft/include/libft.h"
+# include <stdio.h>
 # include <limits.h>
 
 # define SMALL_SORT_LIMITS 5
@@ -28,8 +29,8 @@
 # define NBR_OF_OPT 7
 # define GROUP_100 2
 # define GROUP_500 5
-# define LIMITS_100 10
-# define LIMITS_500 75
+# define LIMITS_100 2
+# define LIMITS_500 50
 # define DEPTH_SEARCH 1
 
 typedef struct s_piles
@@ -47,14 +48,14 @@ typedef struct s_piles
 	int		nb_elem;
 	int		*solve;
 	char	*step;
-	int		nb_step;
+	int		split_flag;
+	int		min;
 	int		max;
 	int		i1;
 	int		i2;
 	int		min1;
 	int		min2;
 	int		offset_a;
-	int		offset_b;
 	int		step_ra;
 	int		step_rra;
 	int		step_rb;
@@ -68,10 +69,8 @@ typedef struct s_piles
 	int		excess_rb;
 	int		excess_rrb;
 	int		excess_rra;
-	int		smallest_opt;
 	int		current_opt[DEPTH_SEARCH];
 	int		flag;
-	int		target;
 }	t_piles;
 
 void	sb(t_piles *piles, int flag);
@@ -115,7 +114,6 @@ void	fastest_push(t_piles *piles);
 void	push_big_from_block(t_piles *piles);
 void	make_copy(t_piles *piles);
 int		getmax(t_piles *piles);
-void	fix_rotation(t_piles *piles);
 void	test_push_rb(t_piles *piles);
 void	test_push_rra(t_piles *piles);
 void	test_push_ra(t_piles *piles);
@@ -135,10 +133,6 @@ int		check_around(t_piles *piles);
 int		in_block(t_piles *piles, int i);
 void	push_mix_rra_rb(t_piles *piles);
 void	push_but_top3(t_piles *piles);
-void	remove_exess_ra(t_piles *piles);
-void	remove_exess_rra(t_piles *piles);
-void	remove_exess_rb(t_piles *piles);
-void	remove_exess_rrb(t_piles *piles);
 void	reset_counters(t_piles *piles);
 void	deep_search(t_piles *piles);
 void	choose_algo(t_piles *piles, int opt);

@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:16:10 by pbergero          #+#    #+#             */
-/*   Updated: 2022/11/30 03:16:57 by pbergero         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:13:52 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	pa(t_piles *piles)
 	piles->b_size--;
 	piles->a_size++;
 	piles->step = ft_strjoin(piles->step, "pa\n", 1, 0);
-	piles->nb_step++;
 }
 
 void	pb(t_piles *piles)
@@ -39,7 +38,6 @@ void	pb(t_piles *piles)
 	piles->a_size--;
 	piles->b_size++;
 	piles->step = ft_strjoin(piles->step, "pb\n", 1, 0);
-	piles->nb_step++;
 }
 
 void	pull_up(int *pile, int size)

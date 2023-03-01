@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 05:44:06 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/20 13:11:39 by pbergero         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:04:18 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	big_sort(t_piles *piles)
 	while (piles->block_nb)
 	{
 		piles->offset_a = 0;
-		piles->offset_b = 0;
 		sort_block(piles);
 		piles->block_nb--;
 	}

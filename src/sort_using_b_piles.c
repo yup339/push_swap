@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:19:39 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/20 12:12:25 by pbergero         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:03:35 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ void	push_a_from_i(t_piles *piles, int i)
 		{
 			i++;
 			rrb(piles, piles->flag);
-			if (piles->flag)
-				piles->offset_b--;
-			piles->step_rb++;
 		}
 	}
 	else
@@ -32,9 +29,6 @@ void	push_a_from_i(t_piles *piles, int i)
 		{
 			i--;
 			rb(piles, piles->flag);
-			if (piles->flag)
-				piles->offset_b++;
-			piles->step_rb++;
 		}
 	}
 	if (piles->flag)

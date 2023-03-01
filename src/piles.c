@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:16:18 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/15 23:29:10 by pbergero         ###   ########.fr       */
+/*   Updated: 2023/02/27 23:42:30 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ t_piles	*ft_make_piles(int argc, char **argv)
 	piles->nb_elem = argc - 1;
 	piles->a_size = argc - 1;
 	piles->b_size = 0;
-	piles->nb_step = 0;
 	piles->block_nb = 0;
 	if (!piles ||!piles->a || !piles->b || !piles->step || !piles->solve
 		|| !add_numbers(argc, argv, piles->a)

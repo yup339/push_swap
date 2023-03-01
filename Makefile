@@ -6,7 +6,7 @@
 #    By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/08 21:04:21 by pbergero          #+#    #+#              #
-#    Updated: 2022/12/16 05:31:21 by pbergero         ###   ########.fr        #
+#    Updated: 2023/02/27 23:03:29 by pbergero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,9 +53,8 @@ SRCS	=	./src/sort_utils.c \
 			./src/sort_using_both_piles_rr.c\
 			./src/try_fastest_algo.c\
 			./src/mix_sort_ra_rb.c\
-			./src/simplify.c
 
-libft	=	./printf/libftprintf.a
+LIBFT	=	./libft/libft.a
 # Objects are all .o files
 OBJS	=	$(SRCS:.c=.o)
 
@@ -66,16 +65,22 @@ OBJS	=	$(SRCS:.c=.o)
 all: $(NAME)
 
 # Generates output file
-$(NAME): $(OBJS)
-	$(HIDE)$(CC) $(CFLAGS) $(libft) -o $@ $^
+$(NAME): $(OBJS) $(LIBFT)
+	$(HIDE)$(CC) $(CFLAGS) $(LIBFT) -o $@ $^
 
 # Removes objects
 clean:
 	$(HIDE)$(RM) $(OBJS)
-
+	$(MAKE) -C libft clean
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME)
-
+	$(MAKE) -C libft fclean
 # Removes objects and executables and remakes
 re: fclean all
+
+visu: all
+	build/push_swap_visualizer/build/bin/visualizer
+
+$(LIBFT):
+	$(MAKE) -C libft

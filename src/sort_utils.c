@@ -6,7 +6,7 @@
 /*   By: pbergero <pascaloubergeron@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 02:20:54 by pbergero          #+#    #+#             */
-/*   Updated: 2022/12/16 00:38:06 by pbergero         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:12:45 by pbergero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	check_rotation(t_piles *piles)
 		i++;
 	}
 	i = 1;
-	piles->nb_step = 0;
 	free(piles->step);
 	piles->step = ft_calloc(1, 1);
 	while (i <= piles->a_size / 2)
@@ -100,7 +99,6 @@ void	check_rotation(t_piles *piles)
 			return ;
 		i++;
 	}
-	piles->nb_step = 0;
 	free(piles->step);
 	piles->step = ft_calloc(1, 1);
 }
